@@ -1,9 +1,9 @@
 /* You'll need to have MySQL running and your Node server running
  * for these tests to pass. */
 
-var mysql = require('mysql');
+var mysql = require("mysql");
 var request = require("request"); // You might need to npm install the request module!
-var expect = require('../../node_modules/chai/chai').expect;
+var expect = require("../../node_modules/chai/chai").expect;
 
 describe("Persistent Node Chat Server", function() {
   var dbConnection;

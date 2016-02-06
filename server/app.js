@@ -1,13 +1,12 @@
-var express = require('express');
-var db = require('./db');
-var chat = require('./chatterbox.js');
+var express = require("express");
+var db = require("./db");
 
 // Middleware
-var morgan = require('morgan');
-var parser = require('body-parser');
+var morgan = require("morgan");
+var parser = require("body-parser");
 
 // Router
-var router = require('./routes.js');
+var router = require("./routes.js");
 
 var app = express();
 module.exports.app = app;
@@ -16,7 +15,7 @@ module.exports.app = app;
 app.set("port", 3000);
 
 // Logging and parsing
-app.use(morgan('dev'));
+app.use(morgan("dev"));
 app.use(parser.json());
 
 // Set up our routes
