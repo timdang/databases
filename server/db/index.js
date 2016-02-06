@@ -6,17 +6,21 @@ var mysql = require('mysql');
 
 
 var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : '',
-  database  : 'chat'
+  host: 'localhost',
+  user: 'root',
+  password: '',
+  database: 'chat'
 });
 
 connection.connect();
 
 connection.query('SELECT * FROM messages', function(err, rows, fields) {
   if (err) throw err;
-  console.log('Database connection is live');
+  console.log('Database connection is live', rows);
 });
 
 connection.end();
+
+exports.data = function(x) {
+  console.log('Get request is coming to the server.');
+};

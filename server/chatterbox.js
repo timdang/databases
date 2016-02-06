@@ -6,4 +6,5 @@ var port = 3000;
 var ip = "127.0.0.1";
 
 var server = http.createServer(handler.requestHandler);
+console.log('Chatterbox server is running.');
 server.listen(port, ip);

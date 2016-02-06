@@ -1,5 +1,5 @@
 exports.requestHandler = function(request, response) {
-  var storage = require("./data.js");
+  var db = require("./db/index.js");
   var url = request.url;
 
   console.log("Serving request type " + request.method + " for url " + url);
@@ -20,7 +20,7 @@ exports.requestHandler = function(request, response) {
 
     if (request.method === "GET") {
       response.writeHead(statusCode, headers);
-      response.end(JSON.stringify(storage.data));
+      response.end(JSON.stringify(db.data));
 
     }
     if (request.method === "POST") {
@@ -31,9 +31,8 @@ exports.requestHandler = function(request, response) {
         body += chunk;
       });
       request.on('end', function() {
-        storage.data.results.push(JSON.parse(body));
-        console.log("db", storage.data);
-        response.end(JSON.stringify(storage.data.results));
+        db.data.results.push(JSON.parse(body));
+        response.end(JSON.stringify(db.data.results));
       });
 
     }
