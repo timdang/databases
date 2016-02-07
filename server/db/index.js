@@ -10,3 +10,5 @@ exports.connection = mysql.createConnection({
   password: '',
   database: 'chat'
 });
+
+exports.connection.connect();

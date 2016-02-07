@@ -3,13 +3,14 @@ var app = {
   rooms: {
     'New Room': 'New Room'
   },
-  server: 'http://127.0.0.1:3000'
+  server: 'http://127.0.0.1:3000/classes/'
 };
 
 app.init = function() {
   // Populate DOM with initial query
   app.fetch(function(data) {
     app.populate(data);
+
     data.forEach(function(message) {
       if (message.roomname === undefined) {
         message.roomname = 'All Rooms';
@@ -20,7 +21,7 @@ app.init = function() {
       }
     });
     $('#room-name').append('<option>New Room<option>');
-  }, '/classes/room1');
+  }, 'messages');
 
   // Collect username from initial load
   app.username = window.location.search.slice(window.location.search.indexOf('=') + 1);
@@ -77,7 +78,7 @@ app.escaped = function(string) {
 
 app.send = function(message, callback) {
   $.ajax({
-    url: app.server + '/classes/room1',
+    url: app.server+"/messages/",
     type: 'POST',
     data: JSON.stringify(message),
     contentType: 'application/json',
@@ -93,7 +94,7 @@ app.send = function(message, callback) {
 
 app.fetch = function(callback, queryParams) {
   $.ajax({
-    url: queryParams === undefined ? app.server + '/classes/room1' : app.server + queryParams,
+    url: app.server + queryParams,
     type: 'GET',
     contentType: 'application/json',
     success: function(data) {
@@ -113,11 +114,11 @@ app.clearMessages = function() {
 app.addMessage = function(username, text, roomname) {
   app.send({
     username: username,
-    text: text,
+    body: text,
     roomname: roomname
   }, function(data) {
     app.clearMessages();
-    app.fetch(app.populate, '/classes/room1');
+    app.fetch(app.populate, 'messages');
     $('#message-text').val('');
   });
 };
